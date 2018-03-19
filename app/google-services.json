@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "413016179487",
+    "firebase_url": "https://taxi-app-piti.firebaseio.com",
+    "project_id": "taxi-app-piti",
+    "storage_bucket": "taxi-app-piti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413016179487:android:2ac8c7eb10297239",
+        "android_client_info": {
+          "package_name": "com.simcoder.uber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413016179487-hiq4r0nk5q6pivbuh4n6dnkmnuefhr4u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simcoder.uber",
+            "certificate_hash": "fe1919324eab1b3dd1c62693e4ef4857ea39c7de"
+          }
+        },
+        {
+          "client_id": "413016179487-oennpjq5mk4b61r5hdo37k5b0itippp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2sQZ8bvLJBf_NDtNrWwuYwHvaCwf1scg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413016179487-oennpjq5mk4b61r5hdo37k5b0itippp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
