@@ -171,7 +171,8 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                     GeoFire geoFire = new GeoFire(ref);
                     geoFire.setLocation(userId, new GeoLocation(31.749862,-106.524655/*mLastLocation.getLatitude(), mLastLocation.getLongitude()*/));
 
-                    pickupLocation = new LatLng(31.749862,-106.524655/*mLastLocation.getLatitude(), mLastLocation.getLongitude()*/);
+                    pickupLocation = new LatLng(31.749862,-106.5246553
+                            /*mLastLocation.getLatitude(), mLastLocation.getLongitude()*/);
                     pickupMarker = mMap.addMarker(new MarkerOptions().position(pickupLocation).title("Pickup Here").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_pickup)));
 
                     mRequest.setText("Getting your Driver....");
