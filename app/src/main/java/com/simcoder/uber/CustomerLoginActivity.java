@@ -55,18 +55,28 @@ public class CustomerLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
-                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            Toast.makeText(CustomerLoginActivity.this, "sign up error", Toast.LENGTH_SHORT).show();
-                        }else{
-                            String user_id = mAuth.getCurrentUser().getUid();
-                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id);
-                            current_user_db.setValue(true);
-                        }
+
+                if (email.equals("")) {
+                    Toast.makeText(CustomerLoginActivity.this, "El correo electronico es requerido", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (password.equals("")) {
+                        Toast.makeText(CustomerLoginActivity.this, "La contraseña es requerida", Toast.LENGTH_SHORT).show();
+                    }else{
+                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(!task.isSuccessful()){
+                                    Toast.makeText(CustomerLoginActivity.this, "Error, intentelo de nuevo", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    String user_id = mAuth.getCurrentUser().getUid();
+                                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id);
+                                    current_user_db.setValue(true);
+                                }
+                            }
+                        });
+
                     }
-                });
+                }
             }
         });
 
@@ -75,14 +85,24 @@ public class CustomerLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
-                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            Toast.makeText(CustomerLoginActivity.this, "sign in error", Toast.LENGTH_SHORT).show();
-                        }
+                if (email.equals("")) {
+                    Toast.makeText(CustomerLoginActivity.this, "El correo electronico es requerido", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (password.equals("")) {
+                        Toast.makeText(CustomerLoginActivity.this, "La contraseña es requerida", Toast.LENGTH_SHORT).show();
+                    }else{
+                        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(!task.isSuccessful()){
+                                    Toast.makeText(CustomerLoginActivity.this, "Error, intentelo de nuevo", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
-                });
+
+                }
+
 
             }
         });
