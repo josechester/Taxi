@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CustomerLoginActivity extends AppCompatActivity {
 
     private EditText mEmail, mPassword;
@@ -53,36 +56,79 @@ public class CustomerLoginActivity extends AppCompatActivity {
         mRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
-                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            Toast.makeText(CustomerLoginActivity.this, "sign up error", Toast.LENGTH_SHORT).show();
+                boolean aux = false;
+                
+                if (email.equals("")) {
+                    Toast.makeText(CustomerLoginActivity.this, "El correo electronico es requerido", Toast.LENGTH_SHORT).show();
+                }else{
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher = pattern.matcher(email);
+                    aux = matcher.matches();
+                    if(!aux){
+                        Toast.makeText(CustomerLoginActivity.this, "El correo electronico es inavalido", Toast.LENGTH_SHORT).show();
+                    }else{
+                        if (password.equals("")) {
+                            Toast.makeText(CustomerLoginActivity.this, "La contraseña es requerida", Toast.LENGTH_SHORT).show();
                         }else{
-                            String user_id = mAuth.getCurrentUser().getUid();
-                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id);
-                            current_user_db.setValue(true);
+                            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(!task.isSuccessful()){
+                                        Toast.makeText(CustomerLoginActivity.this, "Error, intentelo de nuevo", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        String user_id = mAuth.getCurrentUser().getUid();
+                                        DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id);
+                                        current_user_db.setValue(true);
+                                    }
+                                }
+                            });
+
                         }
+
                     }
-                });
+
+                }
             }
         });
 
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
-                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            Toast.makeText(CustomerLoginActivity.this, "sign in error", Toast.LENGTH_SHORT).show();
+                boolean aux = false;
+                if (email.equals("")) {
+                    Toast.makeText(CustomerLoginActivity.this, "El correo electronico es requerido", Toast.LENGTH_SHORT).show();
+                }else{
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher = pattern.matcher(email);
+                    aux = matcher.matches();
+                    if(!aux){
+                        Toast.makeText(CustomerLoginActivity.this, "El correo electronico es inavalido", Toast.LENGTH_SHORT).show();
+                    }else{
+                        if (password.equals("")) {
+                            Toast.makeText(CustomerLoginActivity.this, "La contraseña es requerida", Toast.LENGTH_SHORT).show();
+                        }else{
+                            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(!task.isSuccessful()){
+                                        Toast.makeText(CustomerLoginActivity.this, "Error, intentelo de nuevo", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                         }
+
                     }
-                });
+
+
+
+                }
+
 
             }
         });
