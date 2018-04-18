@@ -6,6 +6,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -64,9 +65,10 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     private Switch mWorkingSwitch;
 
     private int status = 0;
-
     private String customerId = "", destination;
+
     private LatLng destinationLatLng, pickupLatLng;
+
     private float rideDistance;
 
     private Boolean isLoggingOut = false;
@@ -135,6 +137,9 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                         recordRide();
                         endRide();
                         break;
+                        //maybe here other option when the trip start mark the customer destiny
+                        //customerDestinyMarker = mMap.addMarker(new MarkerOptions().position( destinationLatLng).title("pickup location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_pickup)));
+                        //getRouteToMarker( destinationLatLng);
                 }
             }
         });
@@ -196,7 +201,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         });
     }
 
-    Marker pickupMarker;
+    Marker pickupMarker,customerDestinyMarker;
     private DatabaseReference assignedCustomerPickupLocationRef;
     private ValueEventListener assignedCustomerPickupLocationRefListener;
     private void getAssignedCustomerPickupLocation(){
@@ -236,6 +241,8 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                     .build();
             routing.execute();
         }
+        else
+            Log.e("Location","nolocation");
     }
 
     private void getAssignedCustomerDestination(){
