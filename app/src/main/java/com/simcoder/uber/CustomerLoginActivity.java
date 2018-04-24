@@ -60,7 +60,7 @@ public class CustomerLoginActivity extends AppCompatActivity {
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
                 boolean aux = false;
-                
+
                 if (email.equals("")) {
                     Toast.makeText(CustomerLoginActivity.this, "El correo electronico es requerido", Toast.LENGTH_SHORT).show();
                 }else{
