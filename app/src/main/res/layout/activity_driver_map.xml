@@ -22,25 +22,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/logout"
-                android:text="logout"/>
+                android:text="Cerrar sesión"/>
             <Button
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/history"
-                android:text="history"/>
+                android:text="Historial"/>
             <Button
                 android:layout_weight="1"
                 android:layout_gravity="end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/settings"
-                android:text="Settings"/>
+                android:text="Configuración"/>
         </LinearLayout>
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Working"
+            android:text="Disponibilidad"
             android:layout_margin="10sp"
             android:id="@+id/workingSwitch"/>
     </LinearLayout>

@@ -27,19 +27,19 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="From - To"
+                android:text="Desde - Hasta"
                 android:layout_marginBottom="20sp"
                 android:id="@+id/rideLocation"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="distance"
+                android:text="Distancia"
                 android:layout_marginBottom="20sp"
                 android:id="@+id/rideDistance"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="date"
+                android:text="Fecha"
                 android:layout_marginBottom="20sp"
                 android:id="@+id/rideDate"/>
         </LinearLayout>
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pay"
-            android:text="Pay Here"
+            android:text="Pagar aqui"
             android:visibility="gone"
             android:enabled="false"/>
     </LinearLayout>

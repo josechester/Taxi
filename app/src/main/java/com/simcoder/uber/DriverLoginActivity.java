@@ -75,7 +75,7 @@ public class DriverLoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(!task.isSuccessful()){
-                                        Toast.makeText(DriverLoginActivity.this, "sign up error", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(DriverLoginActivity.this, "Error, intentelo de nuevo", Toast.LENGTH_SHORT).show();
                                     }else{
                                         String user_id = mAuth.getCurrentUser().getUid();
                                         DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(user_id).child("name");
@@ -120,7 +120,7 @@ public class DriverLoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(!task.isSuccessful()){
-                                        Toast.makeText(DriverLoginActivity.this, "sign in error", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(DriverLoginActivity.this, "Error, intentelo de nuevo", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
