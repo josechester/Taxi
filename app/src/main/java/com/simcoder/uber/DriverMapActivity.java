@@ -67,7 +67,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     private int status = 0;
     private String customerId = "", destination;
 
-    private LatLng destinationLatLng, pickupLatLng;
+    private LatLng destinationLatLng, pickupLatLng,mLastLocationLatLng;
 
     private float rideDistance;
 
@@ -120,6 +120,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         mLogout = (Button) findViewById(R.id.logout);
         mRideStatus = (Button) findViewById(R.id.rideStatus);
         mHistory = (Button) findViewById(R.id.history);
+        mRideStatus.setText("pick customer");
         mRideStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,14 +129,27 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                         status=2;
                         erasePolylines();
                         if(destinationLatLng.latitude!=0.0 && destinationLatLng.longitude!=0.0){
-                            getRouteToMarker(destinationLatLng);
+                            getRouteToMarker(pickupLatLng);
                         }
-                        mRideStatus.setText("drive completed");
-
+                        mRideStatus.setText("Start ride");
                         break;
                     case 2:
+                        status=3;
+                        erasePolylines();
+                        if(pickupMarker != null){
+                            pickupMarker.remove();
+                        }
+                        customerDestinyMarker = mMap.addMarker(new MarkerOptions().position(destinationLatLng).title("destiny location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_pickup)));
+                        if(destinationLatLng.latitude!=0.0 && destinationLatLng.longitude!=0.0){
+                            getRouteToMarker(destinationLatLng);
+                        }
+                        mRideStatus.setText("End ride");
+                        break;
+
+                    case 3:
                         recordRide();
                         endRide();
+                        mRideStatus.setText("pick customer");
                         break;
                         //maybe here other option when the trip start mark the customer destiny
                         //customerDestinyMarker = mMap.addMarker(new MarkerOptions().position( destinationLatLng).title("pickup location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_pickup)));
@@ -231,19 +245,16 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         });
     }
 
-    private void getRouteToMarker(LatLng pickupLatLng) {
-        if (pickupLatLng != null && mLastLocation != null){
+    private void getRouteToMarker(LatLng destiny) {
             Routing routing = new Routing.Builder()
                     .travelMode(AbstractRouting.TravelMode.DRIVING)
                     .withListener(this)
                     .alternativeRoutes(false)
-                    .waypoints(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), pickupLatLng)
+                    .waypoints(mLastLocationLatLng, destiny)
                     .build();
             routing.execute();
-        }
-        else
-            Log.e("Location","nolocation");
     }
+
 
     private void getAssignedCustomerDestination(){
         String driverId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -310,7 +321,6 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
 
 
     private void endRide(){
-        mRideStatus.setText("picked customer");
         erasePolylines();
 
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -322,7 +332,9 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         geoFire.removeLocation(customerId);
         customerId="";
         rideDistance = 0;
-
+        if(customerDestinyMarker!= null) {
+            customerDestinyMarker.remove();
+        }
         if(pickupMarker != null){
             pickupMarker.remove();
         }
@@ -389,9 +401,10 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                         rideDistance += mLastLocation.distanceTo(location)/1000;
                     }
 
+                   mLastLocationLatLng = new LatLng(location.getLatitude(),location.getLongitude());
+                    mLastLocation=location;
 
-                    LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mLastLocationLatLng));
                     mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
