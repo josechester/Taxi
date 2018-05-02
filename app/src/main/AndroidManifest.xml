@@ -20,15 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service android:name=".onAppKilled" android:stopWithTask="false"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DriverLoginActivity" />
-        <activity android:name=".CustomerLoginActivity" />
+        <activity android:name=".DriverLoginActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".CustomerLoginActivity"
+                  android:screenOrientation="portrait"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -43,12 +46,19 @@
 
         <activity
             android:name=".DriverMapActivity"
-            android:label="@string/title_activity_driver_map" />
-        <activity android:name=".CustomerMapActivity" />
-        <activity android:name=".CustomerSettingsActivity" />
-        <activity android:name=".DriverSettingsActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".HistorySingleActivity"></activity>
+            android:label="@string/title_activity_driver_map"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CustomerMapActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".CustomerSettingsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".DriverSettingsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".HistoryActivity"
+                  android:screenOrientation="portrait"/>
+        <activity
+            android:name=".HistorySingleActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -490,8 +490,10 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
             polyOptions.addAll(route.get(i).getPoints());
             Polyline polyline = mMap.addPolyline(polyOptions);
             polylines.add(polyline);
+            int seconds=route.get(i).getDurationValue() %100;
+            int minutes=((route.get(i).getDurationValue()-seconds)/100);
 
-            Toast.makeText(getApplicationContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Route "+ (i+1) +": distance - "+ (route.get(i).getDistanceValue()/10000) + "Km"+": duration - "+ minutes+1 +" min.",Toast.LENGTH_SHORT).show();
         }
 
     }

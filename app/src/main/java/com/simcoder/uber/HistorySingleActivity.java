@@ -199,7 +199,7 @@ public class HistorySingleActivity extends AppCompatActivity implements OnMapRea
             .clientId(PayPalConfig.PAYPAL_CLIENT_ID);
 
     private void payPalPayment() {
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(ridePrice), "USD", "Uber Ride",
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(ridePrice), "USD", "Taxi Ride",
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
         Intent intent = new Intent(this, PaymentActivity.class);
@@ -347,8 +347,10 @@ public class HistorySingleActivity extends AppCompatActivity implements OnMapRea
             polyOptions.addAll(route.get(i).getPoints());
             Polyline polyline = mMap.addPolyline(polyOptions);
             polylines.add(polyline);
+            int seconds=route.get(i).getDurationValue() %100;
+            int minutes=((route.get(i).getDurationValue()-seconds)/100);
 
-            Toast.makeText(getApplicationContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Route "+ (i+1) +": distance - "+ (route.get(i).getDistanceValue()/10000) + "Km"+": duration - "+ minutes+1 +" min.",Toast.LENGTH_SHORT).show();
         }
 
     }

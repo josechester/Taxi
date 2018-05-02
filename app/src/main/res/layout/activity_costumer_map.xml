@@ -15,7 +15,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <LinarLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttons">
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/settings"
                 android:text="Configuración"/>
-        </LinarLayout>
+        </LinearLayout>
 
         <android.support.v7.widget.CardView
             android:layout_below="@+id/buttons"
@@ -119,17 +119,17 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Uber X"
+                    android:text="Taxi X"
                     android:id="@+id/UberX"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Uber Black"
+                    android:text="Taxi Black"
                     android:id="@+id/UberBlack"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Uber Xl"
+                    android:text="Taxi Xl"
                     android:id="@+id/UberXl"/>
             </RadioGroup>
 
@@ -137,7 +137,7 @@
                 android:layout_gravity="bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pedir Uber"
+                android:text="Pedir Taxi"
                 android:id="@+id/request"/>
         </LinearLayout>
     </LinearLayout>

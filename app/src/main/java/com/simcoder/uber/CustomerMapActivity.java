@@ -1,11 +1,17 @@
 package com.simcoder.uber;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.geofire.GeoFire;
@@ -33,6 +40,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -132,6 +140,11 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
 
 
                 } else {
+                    if(destination==null)
+                    {
+                        Toast.makeText(getBaseContext(),"Porfavor primero Introdusca un destino",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
                     int selectId = mRadioGroup.getCheckedRadioButtonId();
 
@@ -297,6 +310,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
 
     private void getDriverLocation() {
         driverLocationRef = FirebaseDatabase.getInstance().getReference().child("driversWorking").child(driverFoundID).child("l");
+        final Boolean[] executed = {false};
         driverLocationRefListener = driverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -325,13 +339,18 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                     float distance = loc1.distanceTo(loc2);
 
                     if (distance < 100) {
-                        mRequest.setText("Driver's Here");
+                        if(!executed[0]){
+                        Toast.makeText(getBaseContext(),"Su Taxi esta aqui",Toast.LENGTH_SHORT).show();
+                        executed[0] =true;
+                        }
                     } else {
-                        mRequest.setText("Driver Found: " + String.valueOf(distance));
+                        Toast.makeText(getBaseContext(),"Taxi a" + String.valueOf(distance)+" Km ",Toast.LENGTH_SHORT).show();
+
                     }
 
 
-                    mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("your driver").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car)));
+                    mDriverMarker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("your driver").icon(bitmapDescriptorFromVector(getBaseContext(),R.drawable.ic_if_car_taxi)));
+                    mRequest.setText("Cancelar Viaje");
                 }
 
             }
@@ -403,7 +422,6 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
 
                 } else {
                     endRide();
-                    destinationLatLng=null;
                 }
             }
 
@@ -439,13 +457,17 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
         if (mDriverMarker != null) {
             mDriverMarker.remove();
         }
-        mRequest.setText("call Uber");
+        if(destinyMarker !=null)
+            destinyMarker.remove();
+        mRequest.setText("call Taxi");
 
         mDriverInfo.setVisibility(View.GONE);
         mDriverName.setText("");
         mDriverPhone.setText("");
         mDriverCar.setText("Destination: --");
         mDriverProfileImage.setImageResource(R.mipmap.ic_default_user);
+        destinationLatLng=null;
+        destination=null;
         //open activity to pay
     }
 
@@ -492,6 +514,14 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
         }
 
     };
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
 
 
 }
