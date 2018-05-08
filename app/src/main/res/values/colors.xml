@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryDark">#141414</color>
+    <color name="colorPrimary">#231F20</color>
+    <color name="colorSecondary">#6D6E70</color>
+    <color name="colorTertiary">#D3D3D3</color>
+    <color name="colorLightest">#E8E8E8</color>
+    <color name="colorAccent">#E2231A</color>
+
+    <color name="textDark">@android:color/black</color>
+    <color name="textMedium">@color/colorSecondary</color>
+    <color name="textLight">#FFFFFF</color>
+    <color name="textLink">#2768F4</color>
+
+    <!-- UI colors -->
+    <color name="colorSuccess">#2ac33c</color>
+    <color name="colorWarning">#ffbe2f</color>
+    <color name="colorError">#e03831</color>
+
+
+    <!-- Live data row backgrounds -->
+    <color name="exceed_limit_live_data">@color/colorError</color>
+    <color name="not_exceed_limit_live_data">@color/colorLightest</color>
+
+    <!-- Actuators result message text colors -->
+    <color name="actuator_action_success">@color/colorSuccess</color>
+    <color name="actuator_action_fail">@color/colorError</color>
+
+    <!--List selection-->
+    <color name="list_selected">@color/colorTertiary</color>
+    <color name="list_normal">@android:color/transparent</color>
 </resources>

@@ -1,20 +1,252 @@
 <resources>
 
     <!-- Base application theme. -->
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorPrimary">@color/textDark</item>
+        <item name="android:textColorSecondary">@color/textMedium</item>
+
+        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
+        <item name="android:editTextStyle">@style/AppTheme.Widget.EditText</item>
+        <item name="android:buttonStyle">@style/AppTheme.Widget.Button</item>
+        <item name="imageButtonStyle">@style/AppTheme.Widget.ImageButton</item>
+
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:overScrollMode">never</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!-- Base theme with no action bar -->
+
+    <style name="AppTheme.NoBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorPrimary">@color/textDark</item>
+        <item name="android:textColorSecondary">@color/textMedium</item>
+
+        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
+        <item name="android:editTextStyle">@style/AppTheme.Widget.EditText</item>
+        <item name="android:buttonStyle">@style/AppTheme.Widget.Button</item>
+
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:overScrollMode">never</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!-- Activity wrapper styles -->
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.Activity">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
 
+    <style name="AppTheme.Activity.MaxWidth" parent="AppTheme.Activity">
+        <item name="android:layout_width">match_parent</item>
+        <!-- This needs the namespace app: because its a property of BoundLayout -->
+        <!--<item name="maxWidth">@dimen/app_custom_width</item>-->
+       <item name="android:layout_gravity">center_horizontal</item>
+   </style>
+
+   <style name="AppTheme.Activity.Padded" parent="AppTheme.Activity">
+       <item name="android:paddingTop">@dimen/margin_18dp</item>
+       <item name="android:paddingEnd">@dimen/margin_18dp</item>
+       <item name="android:paddingBottom">@dimen/margin_18dp</item>
+       <item name="android:paddingStart">@dimen/margin_18dp</item>
+   </style>
+
+   <style name="AppTheme.Activity.Padded.MaxWidth" parent="AppTheme.Activity.Padded">
+       <item name="android:layout_width">match_parent</item>
+       <!-- This needs the namespace app: because its a property of BoundLayout -->
+        <!--<item name="maxWidth">@dimen/app_custom_width</item>-->
+   <item name="android:layout_gravity">center_horizontal</item>
+</style>
+
+<!-- END of Activity wrapper styles -->
+
+    <style name="AppTheme.Widget" />
+
+    <!-- Dialog styles -->
+
+    <style name="AppTheme.Widget.Dialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/margin_18dp</item>
+
+        <!--<item name="android:minWidth">@dimen/dialog_custom_width</item>-->
+        <!--<item name="android:maxWidth">@dimen/dialog_custom_width</item>-->
+       <!-- This needs the namespace app: because its a property of BoundLayout -->
+    <!--<item name="minWidth">@dimen/dialog_custom_width</item>-->
+    <!--<item name="maxWidth">@dimen/dialog_custom_width</item>-->
+</style>
+
+
+
+<!-- Button styles -->
+
+    <style name="AppTheme.Widget.Button" parent="Widget.AppCompat.Button">
+        <!-- <item name="fontPath">fonts/trade_gothic_regular.ttf</item>-->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+        <item name="android:textSize">@dimen/text_regular</item>
+        <item name="android:textColor">@color/textLight</item>
+        <item name="android:background">@drawable/v_btn_rounded_background</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:drawablePadding">@dimen/margin_10dp</item>
+    </style>
+
+    <style name="AppTheme.Widget.Button.Accent" parent="AppTheme.Widget.Button">
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="backgroundTint">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Widget.Button.Error" parent="AppTheme.Widget.Button">
+        <item name="android:backgroundTint">@color/colorError</item>
+        <item name="backgroundTint">@color/colorError</item>
+    </style>
+
+    <style name="AppTheme.Widget.Button.Hollow" parent="AppTheme.Widget.Button">
+        <!--<item name="fontPath">fonts/trade_gothic_bold.otf</item>-->
+       <item name="android:lineSpacingExtra">3dp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">@color/textDark</item>
+       <item name="android:background">@drawable/v_btn_rounded_background_hollow</item>
+   </style>
+
+   <style name="AppTheme.Widget.Button.Hollow.Error" parent="AppTheme.Widget.Button.Hollow">
+       <item name="android:backgroundTint">@color/colorError</item>
+       <item name="android:textColor">@color/colorError</item>
+       <item name="backgroundTint">@color/colorError</item>
+   </style>
+
+   <style name="AppTheme.Widget.Button.Small" parent="AppTheme.Widget.Button">
+       <item name="android:paddingTop">5dp</item>
+       <item name="android:paddingBottom">5dp</item>
+       <item name="android:paddingStart">10dp</item>
+       <item name="android:paddingEnd">10dp</item>
+       <item name="android:minHeight">0dp</item>
+       <item name="android:textAllCaps">false</item>
+   </style>
+
+   <style name="AppTheme.Widget.Button.Small.Hollow" parent="AppTheme.Widget.Button.Small">
+   <!--<item name="fontPath">fonts/trade_gothic_bold.otf</item>-->
+   <item name="android:lineSpacingExtra">3dp</item>
+   <item name="android:textStyle">bold</item>
+   <item name="android:textColor">@color/textDark</item>
+   <item name="android:background">@drawable/v_btn_rounded_background_hollow</item>
+</style>
+
+<style name="AppTheme.Widget.Button.Transparent" parent="AppTheme.Widget.Button">
+   <item name="android:background">@android:color/transparent</item>
+</style>
+
+<!-- END of Button styles -->
+
+    <!-- Other button styles -->
+
+    <style name="AppTheme.Widget.FloatingActionButton" parent="Widget.Design.FloatingActionButton">
+        <item name="android:layout_width">@dimen/fab_size</item>
+        <item name="android:layout_height">@dimen/fab_size</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:scaleType">center</item>
+        <item name="fabSize">normal</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Widget.ImageButton" parent="AppTheme.Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <!-- END of Other button styles -->
+
+    <!-- Text styles -->
+
+    <style name="AppTheme.EditTextContainer">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginStart">@dimen/margin_18dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_18dp</item>
+        <item name="android:layout_marginTop">@dimen/margin_10dp</item>
+        <item name="android:layout_marginBottom">@dimen/margin_10dp</item>
+        <item name="android:weightSum">1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <!--<item name="android:minWidth">@dimen/app_custom_width</item>-->
+       <!--<item name="android:maxWidth">@dimen/app_custom_width</item>-->
+   </style>
+
+   <style name="AppTheme.EditTextIcon">
+       <item name="android:layout_width">wrap_content</item>
+       <item name="android:layout_height">wrap_content</item>
+   </style>
+
+   <style name="AppTheme.Widget.EditText" parent="Widget.AppCompat.EditText">
+       <!--<item name="fontPath">fonts/trade_gothic_regular.ttf</item>-->
+       <item name="android:textSize">@dimen/text_regular</item>
+       <item name="android:textColor">@color/textDark</item>
+       <item name="android:drawablePadding">@dimen/margin_10dp</item>
+   </style>
+
+   <style name="AppTheme.Widget.TextView" parent="android:Widget.TextView">
+       <!--<item name="fontPath">fonts/trade_gothic_regular.ttf</item>-->
+      <item name="android:lineSpacingExtra">10dp</item>
+      <item name="android:textSize">@dimen/text_regular</item>
+      <item name="android:textColor">@color/textDark</item>
+  </style>
+
+  <style name="AppTheme.Widget.TextView.Bold" parent="AppTheme.Widget.TextView">
+  <!--<item name="fontPath">fonts/trade_gothic_bold.otf</item>-->
+    <item name="android:lineSpacingExtra">3dp</item>
+    <item name="android:textStyle">bold</item>
+</style>
+
+<style name="AppTheme.Widget.TextView.Header" parent="AppTheme.Widget.TextView.Bold">
+    <item name="android:textAllCaps">true</item>
+    <item name="android:textSize">@dimen/text_h2</item>
+    <item name="android:layout_marginBottom">@dimen/margin_10dp</item>
+</style>
+
+<style name="AppTheme.Widget.TextView.Subtitle" parent="AppTheme.Widget.TextView">
+    <item name="android:textColor">@color/textMedium</item>
+    <item name="android:layout_marginBottom">@dimen/margin_10dp</item>
+</style>
+
+<!-- END Text styles -->
+
+    <!-- Other widgets -->
+
+    <style name="AppTheme.Widget.RecyclerView">
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="AppTheme.Widget.RecyclerView.BottomPadded">
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:paddingBottom">@dimen/rv_bottom_gutter_size</item>
+    </style>
 </resources>

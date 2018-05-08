@@ -5,4 +5,24 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_h1">30sp</dimen>
+    <dimen name="text_h2">24sp</dimen>
+    <dimen name="text_regular">20sp</dimen>
+    <dimen name="text_small">16sp</dimen>
+
+    <dimen name="margin_18dp">18dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
+
+    <dimen name="app_custom_width">960px</dimen>
+    <dimen name="dialog_custom_width">960px</dimen>
+
+    <dimen name="main_logo_size">180dp</dimen>
+
+    <dimen name="fab_size">66dp</dimen>
+    <dimen name="imgbtn_icon_size">34dp</dimen>
+    <dimen name="imgbtn_icon_size_small">24dp</dimen>
+    <dimen name="rv_bottom_gutter_size">120dp</dimen>
+
+    <dimen name="speedometer_width">18dp</dimen>
 </resources>

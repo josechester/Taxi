@@ -45,16 +45,18 @@
             android:layout_height="wrap_content"
             android:text="Taxi X"
             android:id="@+id/UberX"/>
+
         <RadioButton
+            android:id="@+id/UberBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Taxi Black"
-            android:id="@+id/UberBlack"/>
+            android:text="Taxi Black"/>
+
         <RadioButton
+            android:id="@+id/UberXl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Taxi Xl"
-            android:id="@+id/UberXl"/>
+            android:text="Taxi Xl"/>
     </RadioGroup>
 
     <Button
