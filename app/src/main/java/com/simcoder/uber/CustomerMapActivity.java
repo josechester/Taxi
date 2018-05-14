@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -64,7 +65,8 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
 
     private FusedLocationProviderClient mFusedLocationClient;
 
-    private Button mLogout, mRequest, mSettings, mHistory;
+    private ImageButton mLogout, mSettings, mHistory;
+    private Button  mRequest;
 
     private LatLng pickupLocation;
 
@@ -115,10 +117,10 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
         mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         mRadioGroup.check(R.id.UberX);
 
-        mLogout = (Button) findViewById(R.id.logout);
+        mLogout = (ImageButton) findViewById(R.id.logout);
         mRequest = (Button) findViewById(R.id.request);
-        mSettings = (Button) findViewById(R.id.settings);
-        mHistory = (Button) findViewById(R.id.history);
+        mSettings = (ImageButton) findViewById(R.id.settings);
+        mHistory = (ImageButton) findViewById(R.id.history);
 
         mLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +144,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                 } else {
                     if(destination==null)
                     {
-                        Toast.makeText(getBaseContext(),"Porfavor primero Introdusca un destino",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),"Porfavor primero Introduzca un destino",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -168,7 +170,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                             mLastLocation.getLatitude(), mLastLocation.getLongitude());
                     pickupMarker = mMap.addMarker(new MarkerOptions().position(pickupLocation).title("Pickup Here").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_pickup)));
 
-                    mRequest.setText("Getting your Driver....");
+                    mRequest.setText("Obteniendo Conductor....");
 
                     getClosestDriver();
                 }
@@ -254,7 +256,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                                     getDriverLocation();
                                     getDriverInfo();
                                     getHasRideEnded();
-                                    mRequest.setText("Looking for Driver Location....");
+                                    mRequest.setText("Obteniendo conductor....");
                                 }
                             }
                         }
@@ -422,6 +424,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
 
                 } else {
                     endRide();
+
                 }
             }
 
@@ -429,6 +432,17 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+    private void pay(){
+
+        /*
+
+        Intent intent = new Intent(this, HistorySingleActivity.class);
+        Bundle b = new Bundle();
+        historyRef.
+        b.putString("rideId", rideId.getText().toString());
+        intent.putExtras(b);
+        startActivity(intent);*/
     }
 
     private void endRide() {
@@ -459,7 +473,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
         }
         if(destinyMarker !=null)
             destinyMarker.remove();
-        mRequest.setText("call Taxi");
+        mRequest.setText("Pedir Taxi");
 
         mDriverInfo.setVisibility(View.GONE);
         mDriverName.setText("");
@@ -468,6 +482,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
         mDriverProfileImage.setImageResource(R.mipmap.ic_default_user);
         destinationLatLng=null;
         destination=null;
+
         //open activity to pay
     }
 

@@ -95,7 +95,7 @@ public class HistoryActivity extends AppCompatActivity {
                     if(dataSnapshot.child("customerPaid").getValue() != null && dataSnapshot.child("driverPaidOut").getValue() == null){
                         if(dataSnapshot.child("distance").getValue() != null){
                             distance = dataSnapshot.child("distance").getValue().toString();
-                            ridePrice = (Double.valueOf(distance) * 0.4);
+                            ridePrice = Double.parseDouble(distance.substring(0, Math.min(distance.length(), 5))) * 15;
                             Balance += ridePrice;
                             mBalance.setText("Balance: " + String.valueOf(Balance) + " $");
                         }

@@ -7,25 +7,40 @@
     tools:context="com.simcoder.uber.DriverLoginActivity"
     android:orientation="vertical">
     <EditText
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Correo electronico"
         android:inputType="textEmailAddress"
+        android:hint="Correo Electronico"
+        android:layout_marginBottom="25dp"
         android:id="@+id/email"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
+        android:layout_marginBottom="25dp"
         android:inputType="textPassword"
         android:id="@+id/password"/>
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
         android:text="Iniciar sesión"
-        android:id="@+id/login"/>
+        android:id="@+id/login"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"/>
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
         android:text="Registrar"
+        android:gravity="center"
+        android:layout_gravity="center"
         android:id="@+id/registration"/>
+
+
+
+
+
 </LinearLayout>

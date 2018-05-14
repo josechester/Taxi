@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -143,11 +144,14 @@ public class HistorySingleActivity extends AppCompatActivity implements OnMapRea
                         }
                         if (child.getKey().equals("customerPaid")){
                             customerPaid =true;
+                            mPay.setText("Pagado");
+
                         }
                         if (child.getKey().equals("distance")){
                             distance = child.getValue().toString();
                             rideDistance.setText(distance.substring(0, Math.min(distance.length(), 5)) + " km");
-                            ridePrice = Double.valueOf(distance) * 0.5;
+                            ridePrice = Double.parseDouble(distance.substring(0, Math.min(distance.length(), 5))) * 15;
+                            Log.e("paypal",ridePrice.toString());
 
                         }
                         if (child.getKey().equals("destination")){
@@ -199,7 +203,7 @@ public class HistorySingleActivity extends AppCompatActivity implements OnMapRea
             .clientId(PayPalConfig.PAYPAL_CLIENT_ID);
 
     private void payPalPayment() {
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(ridePrice), "USD", "Taxi Ride",
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(ridePrice), "MXN", "Taxi Ride",
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
         Intent intent = new Intent(this, PaymentActivity.class);
@@ -224,6 +228,7 @@ public class HistorySingleActivity extends AppCompatActivity implements OnMapRea
 
                         if(paymentResponse.equals("approved")){
                             Toast.makeText(getApplicationContext(), "Payment successful", Toast.LENGTH_LONG).show();
+                            mPay.setText("Pagado");
                             historyRideInfoDb.child("customerPaid").setValue(true);
                             mPay.setEnabled(false);
                         }

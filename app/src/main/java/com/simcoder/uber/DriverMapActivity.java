@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -60,7 +61,8 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     private FusedLocationProviderClient mFusedLocationClient;
 
 
-    private Button mLogout, mSettings, mRideStatus, mHistory;
+    private ImageButton mLogout, mSettings, mHistory;
+    private Button  mRideStatus;
 
     private Switch mWorkingSwitch;
 
@@ -116,11 +118,11 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
             }
         });
 
-        mSettings = (Button) findViewById(R.id.settings);
-        mLogout = (Button) findViewById(R.id.logout);
+        mSettings = (ImageButton) findViewById(R.id.settings);
+        mLogout = (ImageButton)  findViewById(R.id.logout);
         mRideStatus = (Button) findViewById(R.id.rideStatus);
-        mHistory = (Button) findViewById(R.id.history);
-        mRideStatus.setText("pick customer");
+        mHistory =  (ImageButton) findViewById(R.id.history);
+        mRideStatus.setText("Tomar viaje");
         mRideStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +133,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                         if(destinationLatLng.latitude!=0.0 && destinationLatLng.longitude!=0.0){
                             getRouteToMarker(pickupLatLng);
                         }
-                        mRideStatus.setText("Start ride");
+                        mRideStatus.setText("Empezar viaje");
                         break;
                     case 2:
                         status=3;
